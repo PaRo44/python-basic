@@ -1,38 +1,26 @@
-"""
-Домашнее задание №1
-Функции и структуры данных
-"""
+import enum
 
 
-def power_numbers(*numbers):
-    """
-    функция, которая принимает N целых чисел,
-    и возвращает список квадратов этих чисел
-    >>> power_numbers(1, 2, 5, 7)
-    <<< [1, 4, 25, 49]
-    """
-    return [number ** 2 for number in numbers]
-
-# filter types
-ODD = "odd"
-EVEN = "even"
-PRIME = "prime"
+class FilterTypes(enum.Enum):
+    EVEN = 0
+    ODD = 1
+    PRIME = 2
 
 
-def filter_numbers(numbers_list, filter_type):
-    """
-    функция, которая на вход принимает список из целых чисел,
-    и возвращает только чётные/нечётные/простые числа
-    (выбор производится передачей дополнительного аргумента)
+def is_prime(num: int) -> bool:
+    res = True
+    for d in range(2, num):
+        if num % d == 0:
+            res = False
+            break
+    return res
 
-    >>> filter_numbers([1, 2, 3], ODD)
 
-    >>> filter_numbers([2, 3, 4, 5], EVEN)
-    <<< [2, 4]
-    """
-    filter_numbers([2, 1, 3, 5, 4], EVEN)
-    if filter_type == ODD:
-        return [number for number in numbers_list if number % 2 != 0]
-    if filter_type == EVEN:
-        return [number for number in numbers_list if number % 2 == 0]
-    if filter_type == PRIME:
+def filter_numbers(numbers: list[int], filter_type: FilterTypes) -> list[int]:
+    if filter_type == FilterTypes.ODD:
+        res = list(filter(lambda num: num % 2 == 1, numbers))
+    elif filter_type == FilterTypes.EVEN:
+        res = list(filter(lambda num: num % 2 == 0, numbers))
+    elif filter_type == FilterTypes.PRIME:
+        res = list(filter(is_prime, numbers))
+    return res
