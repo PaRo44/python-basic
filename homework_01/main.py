@@ -1,10 +1,7 @@
-import enum
 
-
-class FilterTypes(enum.Enum):
-    EVEN = 0
-    ODD = 1
-    PRIME = 2
+ODD = 1
+EVEN = 0
+PRIME = 2
 
 
 def is_prime(num: int) -> bool:
@@ -16,11 +13,11 @@ def is_prime(num: int) -> bool:
     return res
 
 
-def filter_numbers(numbers: list[int], filter_type: FilterTypes) -> list[int]:
-    if filter_type == FilterTypes.ODD:
+def filter_numbers(numbers: list[int], filter_type) -> list[int]:
+    if filter_type == ODD:
         res = list(filter(lambda num: num % 2 == 1, numbers))
-    elif filter_type == FilterTypes.EVEN:
+    elif filter_type == EVEN:
         res = list(filter(lambda num: num % 2 == 0, numbers))
-    elif filter_type == FilterTypes.PRIME:
+    elif filter_type == PRIME:
         res = list(filter(is_prime, numbers))
     return res
