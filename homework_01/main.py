@@ -1,16 +1,20 @@
+def power_numbers(*numbers):
+    return [number ** 2 for number in numbers]
 
 ODD = 1
 EVEN = 0
 PRIME = 2
 
-
 def is_prime(num: int) -> bool:
+    if num == 0 or num == 1:
+        return False
     res = True
     for d in range(2, num):
         if num % d == 0:
             res = False
             break
     return res
+
 
 
 def filter_numbers(numbers: list[int], filter_type) -> list[int]:
