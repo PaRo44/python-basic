@@ -1,9 +1,10 @@
 from sqlalchemy import Column, Integer, String, Text, ForeignKey
 from sqlalchemy.orm import declarative_base, relationship, deferred, sessionmaker
+from sqlalchemy.ext.asyncio import AsyncSession
 
 
 Base = declarative_base()
-Session = sessionmaker()
+Session = sessionmaker(expire_on_commit=False, class_=AsyncSession)
 
 
 class User(Base):
