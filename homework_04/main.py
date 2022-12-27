@@ -12,7 +12,7 @@ PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://
 
 async def async_main():
     engine = create_async_engine(PG_CONN_URI, echo=True)
-    Session.configure(bind=engine)
+    Session.configure(bind=engine, expire_on_commit=False)
 
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.drop_all)
@@ -43,7 +43,7 @@ async def async_main():
                     ) for p in posts_data
                 ]
             )
-        await session.commit()
+            await session.commit()
     await engine.dispose()
 
 
