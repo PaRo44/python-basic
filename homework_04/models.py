@@ -3,7 +3,7 @@ from sqlalchemy.orm import declarative_base, relationship, deferred
 
 
 Base = declarative_base()
-
+Session = None
 
 class User(Base):
     __tablename__ = 'users'
