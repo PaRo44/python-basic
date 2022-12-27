@@ -1,9 +1,10 @@
 from sqlalchemy import Column, Integer, String, Text, ForeignKey
-from sqlalchemy.orm import declarative_base, relationship, deferred
+from sqlalchemy.orm import declarative_base, relationship, deferred, sessionmaker
 
 
 Base = declarative_base()
-Session = None
+Session = sessionmaker()
+
 
 class User(Base):
     __tablename__ = 'users'
