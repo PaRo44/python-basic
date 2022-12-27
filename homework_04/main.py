@@ -1,3 +1,4 @@
+import os
 import asyncio
 
 from sqlalchemy.orm import sessionmaker
@@ -7,7 +8,8 @@ from homework_04.models import Base, User, Post
 from homework_04.jsonplaceholder_requests import get_api_data
 
 
-PG_CONN_URI = "postgresql+asyncpg://postgres:postgres@localhost/postgres"
+PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://postgres:password@localhost/postgres"
+
 
 
 async def async_main():
