@@ -1,16 +1,25 @@
-"""
-создайте алхимичный engine
-добавьте declarative base (свяжите с engine)
-создайте объект Session
-добавьте модели User и Post, объявите поля:
-для модели User обязательными являются name, username, email
-для модели Post обязательными являются user_id, title, body
-создайте связи relationship между моделями: User.posts и Post.user
-"""
+from sqlalchemy import Column, Integer, String, Text, ForeignKey
+from sqlalchemy.orm import declarative_base, relationship, deferred
 
-import os
 
-PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://postgres:password@localhost/postgres"
+Base = declarative_base()
 
-Base = None
-Session = None
+
+class User(Base):
+    __tablename__ = 'users'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String, nullable=False)
+    username = Column(String, unique=True)
+    email = Column(String, nullable=False)
+    posts = relationship("Post", back_populates="user", cascade="all, delete-orphan")
+
+
+class Post(Base):
+    __tablename__ = 'posts'
+
+    id = Column(Integer, primary_key=True)
+    title = Column(String, nullable=False)
+    body = Column(Text, nullable=False)
+    user_id = deferred(Column(Integer, ForeignKey("users.id"), nullable=False))
+    user = relationship("User", back_populates="posts")
