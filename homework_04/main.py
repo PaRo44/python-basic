@@ -23,7 +23,7 @@ async def async_main():
                     ) for u in users_data
                 ]
             )
-            await session.commit()
+            # await session.commit()
             session.add_all(
                 [
                     Post(

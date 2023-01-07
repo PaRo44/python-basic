@@ -13,8 +13,8 @@ engine = create_async_engine(PG_CONN_URI, echo=True)
 
 Base = declarative_base()
 
-async_session = sessionmaker(engine, expire_on_commit=False, class_=AsyncSession)
-Session = async_scoped_session(async_session, scopefunc=asyncio.current_task)
+Session = sessionmaker(engine, expire_on_commit=False, class_=AsyncSession)
+# Session = async_scoped_session(async_session, scopefunc=asyncio.current_task)
 
 
 class User(Base):
