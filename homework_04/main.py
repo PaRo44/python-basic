@@ -1,19 +1,10 @@
-import os
 import asyncio
 
-from sqlalchemy.ext.asyncio import create_async_engine
-
-from homework_04.models import Base, User, Post, Session
+from homework_04.models import Base, User, Post, Session, engine
 from homework_04.jsonplaceholder_requests import get_api_data
 
 
-PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://postgres:password@localhost/postgres"
-
-
 async def async_main():
-    engine = create_async_engine(PG_CONN_URI, echo=True)
-    Session.configure(bind=engine, expire_on_commit=False)
-
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.drop_all)
         await conn.run_sync(Base.metadata.create_all)
@@ -32,7 +23,7 @@ async def async_main():
                     ) for u in users_data
                 ]
             )
-
+            await session.commit()
             session.add_all(
                 [
                     Post(
