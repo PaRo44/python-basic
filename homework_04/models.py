@@ -24,7 +24,7 @@ class User(Base):
     name = Column(String, nullable=False)
     username = Column(String, unique=True)
     email = Column(String, nullable=False)
-    post = relationship(
+    posts = relationship(
         "Post",
         back_populates="user",
         cascade="all, delete-orphan",
