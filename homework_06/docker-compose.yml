@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  web:
+    build: ./web
+    command: gunicorn --bind 0.0.0.0:5000 --threads 5 --preload wsgi:app
+    volumes:
+      - ./web:/usr/src/app/
+    ports:
+      - 5000:5000
+    env_file:
+      - ./.env.prod
+    depends_on:
+      - db
+  db:
+    image: postgres:13-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - ./.env.prod.db
+    ports:
+      - 5432:5432
+
+volumes:
+  postgres_data:

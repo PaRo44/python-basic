@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}View all users{% endblock %}
+{% block content %}
+<h1 class="mb-4">View all users</h1>
+<div class="row row-cols-1 row-cols-md-3" id="user-cards">
+{% for user in users_list %}
+  <div class="col">
+    <div class="card">
+      <div class="card-header">
+        {{ user.name }} {{ user.surname }}
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">{{ user.login }}</li>
+        <li class="list-group-item">{{ user.email }}</li>
+      </ul>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
