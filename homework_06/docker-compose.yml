@@ -3,11 +3,11 @@ version: '3.8'
 services:
   web:
     build: ./web
-    command: gunicorn --bind 0.0.0.0:5000 --threads 5 --preload wsgi:app
+    command: gunicorn --bind 0.0.0.0:8000 --threads 5 --preload wsgi:app
     volumes:
       - ./web:/usr/src/app/
     ports:
-      - 5000:5000
+      - 8000:8000
     env_file:
       - ./.env.prod
     depends_on:
