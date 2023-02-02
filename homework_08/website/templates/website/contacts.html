@@ -1,0 +1,33 @@
+{% extends "website/base.html" %}
+{% block title %}Контакты{% endblock %}
+{% block content %}
+<div>
+    <h1>Контакты</h1>
+    <p>Связаться со мной можно по почте: <a href="mailto:perminov.vl@yandex.ru">perminov.vl@yandex.ru</a><br>
+    Или написав мне в соцсети:</p>
+    <article>
+        <ul class="contacts-btns list-unstyled d-flex flex-wrap flex-row">
+            <li class="contact-elem">
+                <a href="">
+                    <i class="fab fa-facebook"></i>
+                </a>
+            </li>
+            <li class="contact-elem">
+                <a href="">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </li>
+            <li class="contact-elem">
+                <a href="">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </li>
+            <li class="contact-elem">
+                <a href="">
+                    <i class="fab fa-twitter"></i>
+                </a>
+            </li>
+        </ul>
+    </article>
+</div>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "website/base.html" %}
+{% load static %}
+{% block title %}Основная страница{% endblock %}
+{% block content %}
+<div id="index-page-content">
+    <h1>Привет!</h1>
+    <img src="{% static 'website/images/photo.png' %}" alt="Photo" id="index-photo" class="rounded mx-auto d-block">
+    <p class="lead">Данный сайт является проектной работой <span class="author">Перминова Владимира Юрьевича</span> для курса "<cite>Python Developer. Basic</cite>".</p>
+</div>
+{% endblock %}
