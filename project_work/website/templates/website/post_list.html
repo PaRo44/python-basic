@@ -1,0 +1,38 @@
+{% extends "website/base.html" %}
+{% block title %}Блог{% endblock %}
+{% block content %}
+<div>
+    <h1 class="mb-4">Все посты</h1>
+
+    {% for post in page_obj %}
+      <div class="card mb-3">
+          <div class="card-body">
+            <a href="{% url 'post' post.id %}" class="card-title">
+                {{ post.title }}
+            </a>
+          </div>
+          <div class="card-footer">
+              <span class="text-muted">{{ post.created_on|date:"m.d.Y, H:i" }}</span>
+          </div>
+      </div>
+    {% empty %}
+        <p>Постов пока нет.</p>
+    {% endfor %}
+
+    <div class="pagination mt-4">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}">&laquo; предыдущая</a>
+            {% endif %}
+
+            <span class="current">
+                Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">следующая &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+{% endblock %}
